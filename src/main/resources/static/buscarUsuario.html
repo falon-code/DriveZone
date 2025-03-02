@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+
+    <!-- CSS de DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery (Debe ir antes de DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- JS de DataTables -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        /* 🔹 Estilos para la barra superior */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f9fc;
+            border-bottom: 1px solid #ddd;
+        }
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .user-menu img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            display: none;
+            flex-direction: column;
+        }
+        .dropdown-menu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🔹 Barra superior con título y menú de usuario -->
+    <div class="top-bar">
+        <h1>Lista de Usuarios</h1>
+        <div class="user-menu">
+            <span class="mr-2 text-gray-600 small" id="txt-email-usuario"> ...</span>
+            <img id="userDropdown" src="img/undraw_profile.svg">
+            <div class="dropdown-menu" id="menu">
+                <a href="#"><i class="fas fa-user"></i> Profile</a>
+                <a href="#"><i class="fas fa-cogs"></i> Settings</a>
+                <a href="#"><i class="fas fa-list"></i> Activity Log</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔹 Campo de búsqueda -->
+    <input type="text" id="busqueda" placeholder="Buscar por nombre o ID" class="form-control">
+
+    <!-- 🔹 Tabla de usuarios -->
+    <table id="tablaUsuarios" class="display">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Nombres</th>
+                <th>Cédula</th>
+                <th>Correo</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Password</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Datos dinámicos -->
+        </tbody>
+    </table>
+
+    <!-- 🔹 Script para mostrar/ocultar menú -->
+    <script>
+        document.getElementById('userDropdown').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('show');
+        });
+
+        // Ocultar el menú si se hace clic fuera
+        document.addEventListener('click', function(event) {
+            if (!document.querySelector('.user-menu').contains(event.target)) {
+                document.getElementById('menu').classList.remove('show');
+            }
+        });
+    </script>
+
+    <!-- 🔹 Script principal -->
+    <script src="js/usuarios.js"></script>
+</body>
+</html>
